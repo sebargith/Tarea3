@@ -36,7 +36,7 @@ class Expendedor{
 
 
     /** Constructor, crea productos y los envia al deposito */
-    public Expendedor(int numProducto,int precioProducto){
+    public Expendedor(int numProducto){
 
         this.precioProducto=precioProducto;
         dv = new DepositoVuelto();
@@ -71,55 +71,71 @@ class Expendedor{
         Dulce super8Dulce = null;
 
 
-        if (sabor == 1 && m.getValor() >= precioProducto) {
+        Precios precioProducto;
+
+        switch (sabor) {
+            case 1:
+                precioProducto = Precios.COCACOLAPRECIO;
+                break;
+            case 2:
+                precioProducto = Precios.SPRITEPRECIO;
+                break;
+            case 3:
+                precioProducto = Precios.SNICKERSPRECIO;
+                break;
+            case 4:
+                precioProducto = Precios.SUPER8PRECIO;
+                break;
+            default:
+                throw new NoHayProductoException("Producto Invalido");
+        }
+
+
+        if (sabor == 1 && m.getValor() >= precioProducto.getRefe()) {
             cocaColaBebida = (Bebida) cocacola.getProducto();
             if (cocaColaBebida != null) {
-                vuelto = m.getValor() - precioProducto;
-            }
-            else if(cocaColaBebida == null){
+                vuelto = m.getValor() - precioProducto.getRefe();
+            } else if (cocaColaBebida == null) {
                 throw new NoHayProductoException("No quedan bebidas");
             }
-        }
-        else if(sabor == 1 && m.getValor() < precioProducto){
+        } else if (sabor == 1 && m.getValor() < precioProducto.getRefe()) {
+            vuelto = m.getValor();
             throw new PagoInsuficienteException("Pago Insuficiente");
         }
 
-        if (sabor == 2 && m.getValor() >= precioProducto) {
+        if (sabor == 2 && m.getValor() >= precioProducto.getRefe()) {
             spriteBebida = (Bebida) sprite.getProducto();
             if (spriteBebida != null) {
-                vuelto = m.getValor() - precioProducto;
-            }
-            else if(cocaColaBebida == null){
+                vuelto = m.getValor() - precioProducto.getRefe();
+            } else if (spriteBebida == null) {
                 throw new NoHayProductoException("No quedan bebidas");
             }
-        }
-        else if(sabor == 2 && m.getValor() < precioProducto){
+        } else if (sabor == 2 && m.getValor() < precioProducto.getRefe()) {
+            vuelto = m.getValor();
             throw new PagoInsuficienteException("Pago Insuficiente");
         }
 
-        if (sabor == 3 && m.getValor() >= precioProducto) {
+        if (sabor == 3 && m.getValor() >= precioProducto.getRefe()) {
             snickersDulce = (Dulce) snickers.getProducto();
             if (snickersDulce != null) {
-                vuelto = m.getValor() - precioProducto;
-            }
-            else if(cocaColaBebida == null){
+                vuelto = m.getValor() - precioProducto.getRefe();
+            } else if (snickersDulce == null) {
                 throw new NoHayProductoException("No quedan dulces");
             }
-        }
-        else if(sabor == 3 && m.getValor() < precioProducto){
+        } else if (sabor == 3 && m.getValor() < precioProducto.getRefe()) {
+            vuelto = m.getValor();
             throw new PagoInsuficienteException("Pago Insuficiente");
         }
 
-        if (sabor == 4 && m.getValor() >= precioProducto) {
+        if (sabor == 4 && m.getValor() >= precioProducto.getRefe()) {
             super8Dulce = (Dulce) super8.getProducto();
             if (super8Dulce != null) {
-                vuelto = m.getValor() - precioProducto;
-            }
-            else if(cocaColaBebida == null){
+                vuelto = m.getValor() - precioProducto.getRefe();
+            } else if (super8Dulce == null) {
                 throw new NoHayProductoException("No quedan dulces");
             }
-        }
-        else if(sabor == 4 && m.getValor() < precioProducto){
+        } else if (sabor == 4 && m.getValor() < precioProducto.getRefe()) {
+            vuelto = m.getValor();
             throw new PagoInsuficienteException("Pago Insuficiente");
         }
 
