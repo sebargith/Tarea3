@@ -9,6 +9,8 @@ class Comprador{
     /** int que define el vuelto*/
     private int vuelto;
     /** Parametro que llama a metodos del Expendedor*/
+
+
     private Expendedor exp;
 
     /** Recibe la moneda del comprador, el tipo de producto y comprueba la validez de esta solicitud
@@ -21,24 +23,17 @@ class Comprador{
     public Comprador(Moneda m, int cual, Expendedor exp) throws NoHayProductoException, PagoInsuficienteException{
         this.exp=exp;
 
+        //uso del enum, crea un array con los productos (coca,sprite,snickers y super8) y si 'cual = ref' le asigna un producto a ese correspondiente sabor
         if (exp.comprarProducto(m, cual) != null) {
-            switch (cual) {
-                case 1:
-                    sabor = "cocacola";
+            sabores[] arraysaboresenum = sabores.values();
+            for (sabores saboresEnum : arraysaboresenum) {
+                if (saboresEnum.getRef() == cual) {
+                    sabor = saboresEnum.name();
                     break;
-                case 2:
-                    sabor = "sprite";
-                    break;
-                case 3:
-                    sabor = "snickers";
-                    break;
-                case 4:
-                    sabor = "super8";
-                    break;
-                default:
-                    break;
+                }
             }
         }
+
         Moneda moneda = null;
 
         moneda = exp.getVuelto();
