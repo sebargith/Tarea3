@@ -15,9 +15,6 @@ class ExpendedorTest {
         expendedor = new Expendedor(3);
     }
 
-    @AfterEach
-    void tearDown() {
-    }
 
     //Test de Productos
     @Test
